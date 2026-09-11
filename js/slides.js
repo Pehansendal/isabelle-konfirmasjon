@@ -199,8 +199,8 @@ const slides = [
   { type: 'image', src: 'media/bilder/VIDEO0085_0000007781.jpg' },
 
   // --- VIDEOER TIL SLUTT (2 videoer) ---
-  { type: 'video', src: 'media/videoer/Snapchat-229925145.mp4' },
   { type: 'video', src: 'media/videoer/VIDEO0104.mp4' },
+  { type: 'video', src: 'media/videoer/Snapchat-229925145.mp4' },
 
   // --- AVSLUTNING / OUTRO ---
   {
