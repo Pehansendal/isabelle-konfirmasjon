@@ -10,7 +10,7 @@ const DEFAULT_IMAGE_DURATION = 4000;
 // Presentasjonens tittel og innstillinger
 const PRESENTATION_CONFIG = {
   title: "Isabelle sin konfirmasjon",
-  subtitle: "Minner, oppvekst og store øyeblikk",
+  subtitle: "Isabelle er virkelig spesiell",
   date: "2026",
   autoStartOnWelcomeClick: true,
   endTitle: "Gratulerer med dagen, Isabelle! ❤️",
@@ -19,15 +19,6 @@ const PRESENTATION_CONFIG = {
 
 // Liste over bildene i presentasjonen
 const slides = [
-  // --- START / INTRO ---
-  {
-    type: 'intro',
-    title: 'Isabelle',
-    subtitle: 'Isabelle er virkelig spesiell',
-    tag: 'Konfirmasjon 2026',
-    duration: 4500
-  },
-
   // --- DINE BILDER (22 bilder) ---
   { type: 'image', src: 'media/bilder/14k1EBJi.jpg' },
   { type: 'image', src: 'media/bilder/6PCMbcK8.jpg' },
