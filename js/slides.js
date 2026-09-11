@@ -12,6 +12,7 @@ const PRESENTATION_CONFIG = {
   title: "Isabelle sin konfirmasjon",
   subtitle: "Isabelle er virkelig spesiell",
   date: "2026",
+  bgMusic: "media/musikk/cinderella.mp3",
   autoStartOnWelcomeClick: true,
   endTitle: "Gratulerer med dagen, Isabelle! ❤️",
   endSubtitle: "Takk for alle gode minner – og mange flere i vente!",
@@ -148,6 +149,8 @@ const slides = [
   { type: 'image', src: 'media/bilder/ShwUhven.jpg' },
   { type: 'image', src: 'media/bilder/uYjd7Gi1.jpg' },
   { type: 'image', src: 'media/bilder/w0S2yJ0f.jpg' },
+  { type: 'image', src: 'media/bilder/vR78kar7.jpg' },
+  { type: 'image', src: 'media/bilder/TFRzFcFC.jpg' },
   { type: 'image', src: 'media/bilder/WnHXk2H2.jpg' },
   { type: 'image', src: 'media/bilder/IMAG0700.jpg' },
   { type: 'image', src: 'media/bilder/IMAG0713.jpg' },
@@ -198,7 +201,14 @@ const slides = [
   { type: 'image', src: 'media/bilder/VIDEO0029_-000000001.jpg' },
   { type: 'image', src: 'media/bilder/VIDEO0085_0000007781.jpg' },
 
-  // --- VIDEOER TIL SLUTT (2 videoer) ---
+  // --- VIDEOER TIL SLUTT (9 videoer) ---
+  { type: 'video', src: 'media/videoer/h2w6pP17.mp4' },
+  { type: 'video', src: 'media/videoer/A9UTNeUl.mp4' },
+  { type: 'video', src: 'media/videoer/GmTwgMek.mp4' },
+  { type: 'video', src: 'media/videoer/kiVLIXAz.mp4' },
+  { type: 'video', src: 'media/videoer/MafGAz50.mp4' },
+  { type: 'video', src: 'media/videoer/I7yIxRiL.mp4' },
+  { type: 'video', src: 'media/videoer/tMTIcGVg.mp4' },
   { type: 'video', src: 'media/videoer/VIDEO0104.mp4' },
   { type: 'video', src: 'media/videoer/Snapchat-229925145.mp4' },
 

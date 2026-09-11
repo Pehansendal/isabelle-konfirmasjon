@@ -31,12 +31,77 @@
 
   // DOM-elementer
   const stageContent = document.getElementById('stage-content');
-  const stageBackdrop = document.getElementById('stage-backdrop');
+  const stageBackdrop1 = document.getElementById('stage-backdrop-1');
+  const stageBackdrop2 = document.getElementById('stage-backdrop-2');
+  const bgMusic = document.getElementById('bg-music');
   const pauseIndicator = document.getElementById('pause-indicator');
   const captionBar = document.getElementById('caption-bar');
   const controlPanel = document.getElementById('control-panel');
   const slideCounter = document.getElementById('slide-counter');
   const timelineScrubber = document.getElementById('timeline-scrubber');
+
+  let activeBackdropIndex = 1;
+  let shouldPlayMusic = false;
+  let musicFadeTimer = null;
+
+  // Skuddsikker håndtering av bakgrunnsmusikk
+  function stopMusic() {
+    shouldPlayMusic = false;
+    clearInterval(musicFadeTimer);
+    if (bgMusic) {
+      bgMusic.pause();
+    }
+  }
+
+  function startMusic() {
+    if (!bgMusic || isMuted) return;
+
+    // Aldri start musikk dersom nåværende slide er video!
+    const currentSlide = slides[currentIndex];
+    if (currentSlide && currentSlide.type === 'video') {
+      stopMusic();
+      return;
+    }
+
+    shouldPlayMusic = true;
+    clearInterval(musicFadeTimer);
+
+    const playPromise = bgMusic.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        // Dobbeltsjekk at vi fremdeles er på et bilde og ikke har byttet til video i mellomtiden
+        if (!shouldPlayMusic || (slides[currentIndex] && slides[currentIndex].type === 'video')) {
+          bgMusic.pause();
+          return;
+        }
+
+        let v = 0;
+        const targetV = 0.55;
+        bgMusic.volume = 0;
+        musicFadeTimer = setInterval(() => {
+          if (!shouldPlayMusic || (slides[currentIndex] && slides[currentIndex].type === 'video')) {
+            clearInterval(musicFadeTimer);
+            bgMusic.pause();
+            return;
+          }
+          v = Math.min(targetV, v + 0.08);
+          bgMusic.volume = v;
+          if (v >= targetV) clearInterval(musicFadeTimer);
+        }, 40);
+      }).catch(e => console.log('Musikk venter på brukerhandling:', e));
+    }
+  }
+
+  function updateStageBackdrop(src) {
+    if (!stageBackdrop1 || !stageBackdrop2) return;
+    const nextB = activeBackdropIndex === 1 ? stageBackdrop2 : stageBackdrop1;
+    const currB = activeBackdropIndex === 1 ? stageBackdrop1 : stageBackdrop2;
+
+    nextB.style.backgroundImage = `url('${src}')`;
+    nextB.classList.add('active');
+    currB.classList.remove('active');
+    activeBackdropIndex = activeBackdropIndex === 1 ? 2 : 1;
+  }
 
   // Knapper og ikoner
   const btnPrev = document.getElementById('btn-prev');
@@ -165,11 +230,20 @@
     updateTimelineScrubber(index);
     updateGalleryActive(index);
 
-    // Tøm scenen mykt eller bytt innhold
-    stageContent.innerHTML = '';
+    // Myk overtoning: tidligere slide fader ut og fjernes
+    const oldLayers = stageContent.querySelectorAll('.slide-layer');
+    oldLayers.forEach(layer => {
+      layer.classList.remove('active');
+      layer.classList.add('fading-out');
+      setTimeout(() => {
+        if (layer.parentNode === stageContent) {
+          stageContent.removeChild(layer);
+        }
+      }, 900);
+    });
 
     const slideLayer = document.createElement('div');
-    slideLayer.className = 'slide-layer active';
+    slideLayer.className = 'slide-layer';
 
     // Sett varighet for bildeslides
     currentSlideDuration = slide.duration || DEFAULT_IMAGE_DURATION || 3000;
@@ -185,12 +259,26 @@
 
     stageContent.appendChild(slideLayer);
 
+    // Aktiver overtoning i neste ramme
+    requestAnimationFrame(() => {
+      slideLayer.classList.add('active');
+    });
+
     // Bildetekst
     if (slide.caption) {
       captionBar.textContent = slide.caption;
       captionBar.classList.remove('hidden');
     } else {
       captionBar.classList.add('hidden');
+    }
+
+    // Musikkstyring: stopp musikk umiddelbart under video, spill under bilder
+    if (slide.type === 'video') {
+      stopMusic();
+    } else {
+      if (isPlaying) {
+        startMusic();
+      }
     }
 
     // Start timer dersom presentasjonen er i gang og ikke er en aktiv video
@@ -207,12 +295,11 @@
     img.alt = slide.caption || 'Konfirmasjonsbilde';
 
     img.onerror = function () {
-      console.warn('Kunne ikke laste bilde:', slide.src, 'Viser eksempel.');
-      img.src = 'media/bilder/eksempel1.svg';
+      console.warn('Kunne ikke laste bilde:', slide.src);
     };
 
     container.appendChild(img);
-    stageBackdrop.style.backgroundImage = `url('${slide.src}')`;
+    updateStageBackdrop(slide.src);
   }
 
   // --- RENDERE VIDEO ---
@@ -227,6 +314,11 @@
     video.muted = isMuted;
     video.autoplay = isPlaying;
     video.controls = false; // Vi bruker våre egne lekre kontroller
+
+    // Forsikre at musikk ALDRI spiller over video
+    stopMusic();
+    video.addEventListener('play', stopMusic);
+    video.addEventListener('playing', stopMusic);
 
     // Når videoen er ferdig -> automatisk videre til neste slide!
     video.addEventListener('ended', () => {
@@ -360,6 +452,11 @@
   function goToSlide(index) {
     if (index < 0 || index >= slides.length) return;
     
+    // Hvis vi hopper til en video, kutt musikken tvert
+    if (slides[index] && slides[index].type === 'video') {
+      stopMusic();
+    }
+
     // Stopp eventuell pågående video
     stopCurrentVideo();
 
@@ -383,11 +480,16 @@
     updatePlayPauseUI();
     pauseIndicator.classList.remove('visible');
 
-    const activeVideo = stageContent.querySelector('video');
-    if (activeVideo) {
-      activeVideo.play().catch(e => console.log('Video play error:', e));
+    const currentSlide = slides[currentIndex];
+    if (currentSlide && currentSlide.type === 'video') {
+      stopMusic();
+      const activeVideo = stageContent.querySelector('video');
+      if (activeVideo) {
+        activeVideo.play().catch(e => console.log('Video play error:', e));
+      }
     } else {
       startSlideTimer();
+      startMusic();
     }
   }
 
@@ -395,6 +497,7 @@
     isPlaying = false;
     updatePlayPauseUI();
     pauseIndicator.classList.add('visible');
+    stopMusic();
 
     const activeVideo = stageContent.querySelector('video');
     if (activeVideo) {
@@ -459,6 +562,9 @@
   function toggleMute() {
     isMuted = !isMuted;
     updateAudioIcon();
+    if (bgMusic) {
+      bgMusic.muted = isMuted;
+    }
     const activeVideo = stageContent.querySelector('video');
     if (activeVideo) {
       activeVideo.muted = isMuted;

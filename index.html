@@ -13,9 +13,13 @@
 <body>
 
   <div id="app">
-    <!-- Bakgrunn med uskarphet (fyller hele skjermen bak bildene) -->
-    <div id="stage-backdrop" class="stage-backdrop"></div>
+    <!-- Bakgrunn med uskarphet (to lag for jevn overtoning mellom bildene) -->
+    <div id="stage-backdrop-1" class="stage-backdrop active"></div>
+    <div id="stage-backdrop-2" class="stage-backdrop"></div>
     <div class="stage-vignette"></div>
+
+    <!-- Bakgrunnsmusikk (spilles ved bilder, pauses automatisk ved video) -->
+    <audio id="bg-music" src="media/musikk/cinderella.mp3" loop preload="auto"></audio>
 
 
     <!-- Pause-indikator øverst til høyre -->
