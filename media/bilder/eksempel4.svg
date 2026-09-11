@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#19281a"/>
+      <stop offset="50%" stop-color="#243b26"/>
+      <stop offset="100%" stop-color="#101c11"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a8f0a0"/>
+      <stop offset="50%" stop-color="#e2fbe0"/>
+      <stop offset="100%" stop-color="#76d26c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#76d26c" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <circle cx="960" cy="460" r="500" fill="url(#glow)"/>
+
+  <rect x="120" y="80" width="1680" height="920" rx="24" fill="none" stroke="url(#gold)" stroke-width="2" stroke-opacity="0.3"/>
+  <rect x="140" y="100" width="1640" height="880" rx="16" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <g transform="translate(960, 400)">
+    <circle cx="0" cy="0" r="70" fill="#1b2f1d" stroke="url(#gold)" stroke-width="2.5"/>
+    <!-- Sun / Nature icon -->
+    <circle cx="0" cy="0" r="18" fill="none" stroke="url(#gold)" stroke-width="4"/>
+    <line x1="0" y1="-30" x2="0" y2="-22" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="0" y1="22" x2="0" y2="30" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="-30" y1="0" x2="-22" y2="0" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="22" y1="0" x2="30" y2="0" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <text x="960" y="560" font-family="'Playfair Display', Georgia, serif" font-size="44" font-weight="700" fill="url(#gold)" text-anchor="middle">
+    Bildeplassholder #4
+  </text>
+  <text x="960" y="620" font-family="'Inter', 'Segoe UI', sans-serif" font-size="24" fill="#dbeef0" text-anchor="middle" letter-spacing="2">
+    Sommerferier, lek og latter med familien
+  </text>
+  
+  <rect x="760" y="660" width="400" height="42" rx="21" fill="rgba(118,210,108,0.15)" stroke="rgba(118,210,108,0.4)" stroke-width="1"/>
+  <text x="960" y="687" font-family="'Inter', 'Segoe UI', sans-serif" font-size="16" fill="#e2fbe0" text-anchor="middle">
+    Bytt ut med ditt eget bilde i media/bilder/
+  </text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e182a"/>
+      <stop offset="50%" stop-color="#2c1e3d"/>
+      <stop offset="100%" stop-color="#121019"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e6ca65"/>
+      <stop offset="50%" stop-color="#fdf3cd"/>
+      <stop offset="100%" stop-color="#d4af37"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#d4af37" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Bakgrunn -->
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <circle cx="960" cy="460" r="500" fill="url(#glow)"/>
+
+  <!-- Rammeverk -->
+  <rect x="120" y="80" width="1680" height="920" rx="24" fill="none" stroke="url(#gold)" stroke-width="2" stroke-opacity="0.3"/>
+  <rect x="140" y="100" width="1640" height="880" rx="16" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <!-- Ikon -->
+  <g transform="translate(960, 400)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="70" fill="#241b35" stroke="url(#gold)" stroke-width="2.5"/>
+    <path d="M-30,-15 L-20,-30 L20,-30 L30,-15 L40,-15 C45,-15 48,-11 48,-6 L48,25 C48,30 45,34 40,34 L-40,34 C-45,34 -48,30 -48,25 L-48,-6 C-48,-11 -45,-15 -40,-15 Z" fill="none" stroke="url(#gold)" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="0" cy="10" r="18" fill="none" stroke="url(#gold)" stroke-width="4"/>
+    <circle cx="28" cy="-2" r="4" fill="#fdf3cd"/>
+  </g>
+
+  <!-- Tekst -->
+  <text x="960" y="560" font-family="'Playfair Display', Georgia, serif" font-size="44" font-weight="700" fill="url(#gold)" text-anchor="middle">
+    Bildeplassholder #1
+  </text>
+  <text x="960" y="620" font-family="'Inter', 'Segoe UI', sans-serif" font-size="24" fill="#e0d7ec" text-anchor="middle" letter-spacing="2">
+    De første årene – nysgjerrig og full av smil
+  </text>
+  
+  <rect x="760" y="660" width="400" height="42" rx="21" fill="rgba(212,175,55,0.15)" stroke="rgba(212,175,55,0.4)" stroke-width="1"/>
+  <text x="960" y="687" font-family="'Inter', 'Segoe UI', sans-serif" font-size="16" fill="#fdf3cd" text-anchor="middle">
+    Bytt ut med ditt eget bilde i media/bilder/
+  </text>
+</svg>

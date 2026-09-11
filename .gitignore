@@ -1,0 +1,15 @@
+# Operativsystemfiler
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# IDE og editorer
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logger
+*.log

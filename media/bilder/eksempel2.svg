@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141e2a"/>
+      <stop offset="50%" stop-color="#1d2d3e"/>
+      <stop offset="100%" stop-color="#0f1620"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#70e1ff"/>
+      <stop offset="50%" stop-color="#cbf3ff"/>
+      <stop offset="100%" stop-color="#49b6ff"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#49b6ff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <circle cx="960" cy="460" r="500" fill="url(#glow)"/>
+
+  <rect x="120" y="80" width="1680" height="920" rx="24" fill="none" stroke="url(#gold)" stroke-width="2" stroke-opacity="0.3"/>
+  <rect x="140" y="100" width="1640" height="880" rx="16" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <g transform="translate(960, 400)">
+    <circle cx="0" cy="0" r="70" fill="#172738" stroke="url(#gold)" stroke-width="2.5"/>
+    <path d="M-25,15 C-25,2 -10,-10 0,-25 C10,-10 25,2 25,15 C25,28 14,35 0,35 C-14,35 -25,28 -25,15 Z" fill="url(#gold)"/>
+  </g>
+
+  <text x="960" y="560" font-family="'Playfair Display', Georgia, serif" font-size="44" font-weight="700" fill="url(#gold)" text-anchor="middle">
+    Bildeplassholder #2
+  </text>
+  <text x="960" y="620" font-family="'Inter', 'Segoe UI', sans-serif" font-size="24" fill="#d2e7f7" text-anchor="middle" letter-spacing="2">
+    Barnehagetid og gode venner
+  </text>
+  
+  <rect x="760" y="660" width="400" height="42" rx="21" fill="rgba(73,182,255,0.15)" stroke="rgba(73,182,255,0.4)" stroke-width="1"/>
+  <text x="960" y="687" font-family="'Inter', 'Segoe UI', sans-serif" font-size="16" fill="#cbf3ff" text-anchor="middle">
+    Bytt ut med ditt eget bilde i media/bilder/
+  </text>
+</svg>

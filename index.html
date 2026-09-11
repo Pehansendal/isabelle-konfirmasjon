@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Isabelle sin konfirmasjon – Presentasjon</title>
+  <meta name="description" content="Bilde- og videopresentasjon til Isabelles konfirmasjon. En hyllest til oppvekst, gode minner og framtiden.">
+  
+  <!-- Stilark -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+</head>
+<body>
+
+  <div id="app">
+    <!-- Bakgrunn med uskarphet (fyller hele skjermen bak bildene) -->
+    <div id="stage-backdrop" class="stage-backdrop"></div>
+    <div class="stage-vignette"></div>
+
+    <!-- Fremdriftsindikator på toppen av skjermen (teller ned 4 sekunder) -->
+    <div class="top-progress-container" id="progress-container">
+      <div class="top-progress-bar" id="progress-bar"></div>
+    </div>
+
+    <!-- Pause-indikator øverst til høyre -->
+    <div class="pause-indicator" id="pause-indicator">
+      <span class="pulse-dot"></span>
+      <span>PAUSE</span>
+    </div>
+
+    <!-- Hovedscene hvor bildene og videoene vises -->
+    <main class="stage-content" id="stage-content">
+      <!-- Slides genereres og byttes dynamisk av js/app.js -->
+    </main>
+
+    <!-- Bildetekst nede i bildet -->
+    <div class="slide-caption-bar hidden" id="caption-bar"></div>
+
+    <!-- Flytende kontrollpanel -->
+    <nav class="control-panel" id="control-panel" aria-label="Presentasjonskontroller">
+      <!-- Forrige slide (Spol bakover) -->
+      <button class="ctrl-btn" id="btn-prev" title="Forrige slide (Venstre piltast)" aria-label="Forrige slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/>
+        </svg>
+      </button>
+
+      <!-- Play / Pause -->
+      <button class="ctrl-btn btn-play-pause" id="btn-play-pause" title="Pause / Start (Mellomromstast)" aria-label="Pause eller start">
+        <svg id="icon-play" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg id="icon-pause" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+      </button>
+
+      <!-- Neste slide (Spol fremover) -->
+      <button class="ctrl-btn" id="btn-next" title="Neste slide (Høyre piltast)" aria-label="Neste slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+        </svg>
+      </button>
+
+      <div class="ctrl-divider"></div>
+
+      <!-- Scrubber tidslinje -->
+      <div class="timeline-scrubber" id="timeline-scrubber" title="Hopp direkte til et bilde">
+        <!-- Prikker fylles inn dynamisk -->
+      </div>
+
+      <!-- Slide teller -->
+      <div class="slide-counter" id="slide-counter">1 / 1</div>
+
+      <div class="ctrl-divider"></div>
+
+      <!-- Lyd / Mute knapp (for videoer) -->
+      <button class="ctrl-btn" id="btn-audio" title="Lyd av/på (M-tast)" aria-label="Lyd av eller på">
+        <svg id="icon-volume-on" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+        <svg id="icon-volume-off" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+      </button>
+
+      <!-- Slide-oversikt (Galleri-skuff) -->
+      <button class="ctrl-btn" id="btn-gallery" title="Åpne bildeoversikt" aria-label="Vis alle bilder">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/>
+        </svg>
+      </button>
+
+      <!-- Fullskjerm knapp -->
+      <button class="ctrl-btn" id="btn-fullscreen" title="Fullskjerm (F-tast)" aria-label="Gå i fullskjerm">
+        <svg id="icon-fs-enter" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+        </svg>
+        <svg id="icon-fs-exit" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+          <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Slide-oversikt / Skuff for rask navigering under taler -->
+    <div class="gallery-drawer" id="gallery-drawer">
+      <div class="gallery-header">
+        <span class="gallery-title">Oversikt over alle slides</span>
+        <button class="gallery-close" id="btn-gallery-close" aria-label="Lukk oversikt">&times;</button>
+      </div>
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Bilde-kort fylles inn dynamisk -->
+      </div>
+    </div>
+
+    <!-- Velkomstskjerm (Klikk her for å starte – sikrer at fullskjerm og autoplay tillates) -->
+    <section class="modal-overlay" id="welcome-modal" aria-modal="true" role="dialog">
+      <div class="hero-content">
+        <div class="hero-emblem">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
+          </svg>
+        </div>
+        <div class="special-badge">Konfirmasjon 2026</div>
+        <h1 class="hero-title" id="welcome-title">Isabelle</h1>
+        <p class="hero-subtitle" id="welcome-subtitle">En feiring av minner, latter og store opplevelser</p>
+
+        <button class="btn-start-presentation" id="btn-start">
+          <span>Start presentasjon</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <div class="hero-hints">
+          <div class="hero-hint-item"><kbd>Mellomrom</kbd> <span>Pause / Start</span></div>
+          <div class="hero-hint-item"><kbd>← / →</kbd> <span>Spol / Hopp</span></div>
+          <div class="hero-hint-item"><kbd>F</kbd> <span>Fullskjerm</span></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Skripts -->
+  <script src="js/slides.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

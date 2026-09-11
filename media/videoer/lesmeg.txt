@@ -1,0 +1,10 @@
+Her legger du inn videofilene dine (f.eks. video1.mp4, konfirmant.mp4, osv.)
+
+Tips for videoer:
+- Formatet .mp4 (H.264) fungerer best i alle nettlesere.
+- Du kan legge til videofiler i slides.js slik:
+  {
+    type: 'video',
+    src: 'media/videoer/ditt_videonavn.mp4',
+    caption: 'Tale eller morsomt minne'
+  }
