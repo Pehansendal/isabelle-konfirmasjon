@@ -32,7 +32,6 @@
   // DOM-elementer
   const stageContent = document.getElementById('stage-content');
   const stageBackdrop = document.getElementById('stage-backdrop');
-  const progressBar = document.getElementById('progress-bar');
   const pauseIndicator = document.getElementById('pause-indicator');
   const captionBar = document.getElementById('caption-bar');
   const controlPanel = document.getElementById('control-panel');
@@ -158,8 +157,6 @@
   // ==========================================================================
   function renderSlide(index) {
     cancelAnimationFrame(animationFrameId);
-    resetProgressBar();
-
     const slide = slides[index];
     if (!slide) return;
 
@@ -230,14 +227,6 @@
     video.muted = isMuted;
     video.autoplay = isPlaying;
     video.controls = false; // Vi bruker våre egne lekre kontroller
-
-    // Følg videoens fremdrift på topplinjen
-    video.addEventListener('timeupdate', () => {
-      if (video.duration) {
-        const percent = (video.currentTime / video.duration) * 100;
-        progressBar.style.width = `${percent}%`;
-      }
-    });
 
     // Når videoen er ferdig -> automatisk videre til neste slide!
     video.addEventListener('ended', () => {
@@ -331,13 +320,11 @@
 
       const elapsed = timestamp - slideStartTime;
       const progress = Math.min(elapsed / currentSlideDuration, 1);
-      progressBar.style.width = `${progress * 100}%`;
 
       if (progress < 1) {
         animationFrameId = requestAnimationFrame(step);
       } else {
         // Tiden er ute -> Gå til neste slide!
-        progressBar.style.width = '100%';
         nextSlide();
       }
     }
@@ -348,11 +335,6 @@
   function pauseSlideTimer() {
     cancelAnimationFrame(animationFrameId);
     slidePausedAt = performance.now() - slideStartTime;
-  }
-
-  function resetProgressBar() {
-    progressBar.style.width = '0%';
-    slidePausedAt = 0;
   }
 
   // ==========================================================================
@@ -400,7 +382,6 @@
     isPlaying = true;
     updatePlayPauseUI();
     pauseIndicator.classList.remove('visible');
-    progressBar.classList.remove('paused');
 
     const activeVideo = stageContent.querySelector('video');
     if (activeVideo) {
@@ -414,7 +395,6 @@
     isPlaying = false;
     updatePlayPauseUI();
     pauseIndicator.classList.add('visible');
-    progressBar.classList.add('paused');
 
     const activeVideo = stageContent.querySelector('video');
     if (activeVideo) {
