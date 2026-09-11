@@ -22,7 +22,7 @@
   // Timer og fremdrift
   let slideStartTime = 0;
   let slidePausedAt = 0;
-  let currentSlideDuration = DEFAULT_IMAGE_DURATION || 4000;
+  let currentSlideDuration = DEFAULT_IMAGE_DURATION || 3000;
   let animationFrameId = null;
 
   // Auto-skjul av kontroller
@@ -172,7 +172,7 @@
     slideLayer.className = 'slide-layer active';
 
     // Sett varighet for bildeslides
-    currentSlideDuration = slide.duration || DEFAULT_IMAGE_DURATION || 4000;
+    currentSlideDuration = slide.duration || DEFAULT_IMAGE_DURATION || 3000;
 
     // Bygg innhold basert på type
     if (slide.type === 'image') {

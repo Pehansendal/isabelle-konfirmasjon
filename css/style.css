@@ -118,7 +118,7 @@ html, body {
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 1px rgba(255, 255, 255, 0.2);
-  transition: transform 4.5s ease-out;
+  transition: transform 3.5s ease-out;
   transform: scale(1);
 }
 

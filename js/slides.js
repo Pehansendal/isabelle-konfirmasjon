@@ -4,8 +4,8 @@
  * ============================================================================
  */
 
-// Standard visningstid i millisekunder (4000 ms = 4 sekunder)
-const DEFAULT_IMAGE_DURATION = 4000;
+// Standard visningstid i millisekunder (3000 ms = 3 sekunder)
+const DEFAULT_IMAGE_DURATION = 3000;
 
 // Presentasjonens tittel og innstillinger
 const PRESENTATION_CONFIG = {
