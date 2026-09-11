@@ -64,30 +64,22 @@
     }
 
     shouldPlayMusic = true;
+
+    // HVIS MUSIKKEN ALLEREDE SPILLER: La den spille helt uavbrutt uten å røre den!
+    if (!bgMusic.paused) {
+      return;
+    }
+
     clearInterval(musicFadeTimer);
+    bgMusic.volume = 0.55;
 
     const playPromise = bgMusic.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {
-        // Dobbeltsjekk at vi fremdeles er på et bilde og ikke har byttet til video i mellomtiden
+        // Dobbeltsjekk at vi fremdeles er på et bilde
         if (!shouldPlayMusic || (slides[currentIndex] && slides[currentIndex].type === 'video')) {
           bgMusic.pause();
-          return;
         }
-
-        let v = 0;
-        const targetV = 0.55;
-        bgMusic.volume = 0;
-        musicFadeTimer = setInterval(() => {
-          if (!shouldPlayMusic || (slides[currentIndex] && slides[currentIndex].type === 'video')) {
-            clearInterval(musicFadeTimer);
-            bgMusic.pause();
-            return;
-          }
-          v = Math.min(targetV, v + 0.08);
-          bgMusic.volume = v;
-          if (v >= targetV) clearInterval(musicFadeTimer);
-        }, 40);
       }).catch(e => console.log('Musikk venter på brukerhandling:', e));
     }
   }
@@ -276,7 +268,7 @@
     if (slide.type === 'video') {
       stopMusic();
     } else {
-      if (isPlaying) {
+      if (isPlaying && bgMusic && bgMusic.paused) {
         startMusic();
       }
     }
