@@ -23,7 +23,7 @@ const slides = [
   {
     type: 'intro',
     title: 'Isabelle',
-    subtitle: 'En reise gjennom barndom og oppvekst',
+    subtitle: 'Isabelle er virkelig spesiell',
     tag: 'Konfirmasjon 2026',
     duration: 4500
   },
